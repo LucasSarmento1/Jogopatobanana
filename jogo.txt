@@ -1,0 +1,8 @@
+tarefas para construção do jogo:
+
+1-corrigir setTimeout;
+2-colocar score;
+3-colocar vida;
+4-dectar a colisão das bombas com o pato banana;
+5-colocar estados de jogo:
+6-tela inicial/tela de jogo/tela final/tela gameover
