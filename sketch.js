@@ -9,7 +9,8 @@ var vida=3;
 var vida1, vida2, vida3;
 var vida1img, vida2img, vida3img;
 var score=0;
-
+var estadodejogo=0;
+var button;
 
  function preload(){
     patoimg=loadImage("images/heroi.png");
@@ -47,20 +48,47 @@ function setup(){
     vida3=createSprite(80,80);
     vida3.addImage(vida3img);
     vida3.scale=0.25;
+    vida3.visible=true;
    
     //gerar grupos
     inimigog=new Group();
     balag=new Group();
+
+
+    button=createButton("JOGAR");
+    button.position(width/2-100, height/2);
+    button.class("estiloButton");
 }
 
 function draw(){
+     background("white") 
+    console.log(estadodejogo);
+
+    //controlando os estados de jogo
+    if(estadodejogo===0){
+        background(fundo1);
+        textSize(70);
+        fill("yellow");
+        stroke("black");
+        strokeWeight(30)
+        text("Pato Banana Adventures",width/2-390,height/2-200);
+        button.mousePressed(()=>{         
+            estadodejogo=1;
+            button.hide();
+        })
+
+    }
+      
+    else if(estadodejogo===1){
+    
+    //button.hide();
     background(fundo2);
     solo.x=pato.x
      
      fill("yellow");
      textSize(20);
      text("PONTUAÇÃO:"+score,width/2,50);
-
+       
      //contagem de vida
 
      if(vida===3){
@@ -106,23 +134,36 @@ function draw(){
    
     gerarinimigos();
 
-    if(balag.isTouching(inimigog)){
-        for(var j=0; j<inimigog.length; j=j+1){
-            if(balag.isTouching(inimigog[j])){
-                balag.destroyEach();
-                inimigog[j].remove(j);
-                score=score+1;
-    } } }
+    // if(balag.isTouching(inimigog)){
+    //     for(var j=0; j<inimigog.length; j=j+1){
+    //         if(balag.isTouching(inimigog[j])){
+    //             balag.destroyEach();
+    //             inimigog[j].remove(j);
+    //             score=score+1;
+    // } } }
 
-    if(pato.isTouching(inimigog)){
-        for(var j=0; j<inimigog.length; j=j+1){
-            if(pato.isTouching(inimigog[j])){
-                inimigog[j].remove(j);
-        vida=vida-1;
-        console.log(vida);
-    }}}
+    // if(pato.isTouching(inimigog)){
+    //     for(var j=0; j<inimigog.length; j=j+1){
+    //         if(pato.isTouching(inimigog[j])){
+    //             inimigog[j].remove(j);
+    //     vida=vida-1;
+    //     console.log(vida);
+    // }}}
+
     drawSprites();
+    }
+
+    if(estadodejogo===2){
+        background("yellow");
+    }
+
+    if(estadodejogo===3){
+        background("red");
+    }
+
+
 }
+
 function gerarinimigos(){
     var frame=Math.round(random(70,100))
 
